@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package resource;
+
+option go_package = "github.com/57blocks/go-boilerplate/gen/go/resource";
+
+message StringMessage {
+  string value = 1;
+}

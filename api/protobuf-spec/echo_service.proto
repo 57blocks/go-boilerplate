@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package service;
+
+option go_package = "github.com/57blocks/go-boilerplate/gen/go/service";
+
+import "google/api/annotations.proto";
+import "resource.proto";
+
+service EchoService {
+  rpc Echo(resource.StringMessage) returns (resource.StringMessage) {
+    option (google.api.http) = {
+      post: "/v1/echo"
+      body: "*"
+    };
+  }
+}
