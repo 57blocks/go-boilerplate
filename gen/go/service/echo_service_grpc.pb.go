@@ -12,7 +12,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
+const _ = grpc.SupportPackageIsVersion7
 
 // EchoServiceClient is the client API for EchoService service.
 //
@@ -39,19 +39,30 @@ func (c *echoServiceClient) Echo(ctx context.Context, in *resource.StringMessage
 }
 
 // EchoServiceServer is the server API for EchoService service.
+// All implementations must embed UnimplementedEchoServiceServer
+// for forward compatibility
 type EchoServiceServer interface {
 	Echo(context.Context, *resource.StringMessage) (*resource.StringMessage, error)
+	mustEmbedUnimplementedEchoServiceServer()
 }
 
-// UnimplementedEchoServiceServer can be embedded to have forward compatible implementations.
+// UnimplementedEchoServiceServer must be embedded to have forward compatible implementations.
 type UnimplementedEchoServiceServer struct {
 }
 
-func (*UnimplementedEchoServiceServer) Echo(context.Context, *resource.StringMessage) (*resource.StringMessage, error) {
+func (UnimplementedEchoServiceServer) Echo(context.Context, *resource.StringMessage) (*resource.StringMessage, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Echo not implemented")
 }
+func (UnimplementedEchoServiceServer) mustEmbedUnimplementedEchoServiceServer() {}
 
-func RegisterEchoServiceServer(s *grpc.Server, srv EchoServiceServer) {
+// UnsafeEchoServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to EchoServiceServer will
+// result in compilation errors.
+type UnsafeEchoServiceServer interface {
+	mustEmbedUnimplementedEchoServiceServer()
+}
+
+func RegisterEchoServiceServer(s grpc.ServiceRegistrar, srv EchoServiceServer) {
 	s.RegisterService(&_EchoService_serviceDesc, srv)
 }
 

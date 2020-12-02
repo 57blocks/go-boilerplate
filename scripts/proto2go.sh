@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # Install the following tools for grpc-gateway
-# go install \
-#     github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway \
-#     github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2 \
-#     google.golang.org/protobuf/cmd/protoc-gen-go \
-#     google.golang.org/grpc/cmd/protoc-gen-go-grpc
+go install \
+    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway \
+    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2 \
+    google.golang.org/protobuf/cmd/protoc-gen-go \
+    google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 SRC=api/protobuf-spec
 GOOGLEAPIS=third_party/googleapis
